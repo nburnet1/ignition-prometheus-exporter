@@ -1,16 +1,14 @@
 package dev.bwdesigngroup.prometheus.common.api;
 
-import java.util.List;
-import java.util.Map;
-
 import com.inductiveautomation.ignition.common.rpc.RpcInterface;
 import com.inductiveautomation.ignition.common.rpc.RpcSerializer;
 import com.inductiveautomation.ignition.common.rpc.proto.ProtoRpcSerializer;
+import java.util.List;
+import java.util.Map;
 
 /**
- * RPC interface for Prometheus metrics scripting functions.
- * This interface defines all the methods that can be called from Client/Designer scopes
- * and will be executed on the Gateway scope via RPC.
+ * RPC interface for Prometheus metrics scripting functions. This interface defines all the methods
+ * that can be called from Client/Designer scopes and will be executed on the Gateway scope via RPC.
  */
 @RpcInterface(packageId = "dev.bwdesigngroup.prometheus")
 public interface PrometheusScriptInterface {
@@ -28,7 +26,9 @@ public interface PrometheusScriptInterface {
      * @param errorIfExists Whether to throw an error if the metric already exists (default: false)
      * @throws Exception if metric creation fails
      */
-    void createCounter(String metricName, String description, List<String> labelNames, boolean errorIfExists) throws Exception;
+    void createCounter(
+            String metricName, String description, List<String> labelNames, boolean errorIfExists)
+            throws Exception;
 
     /**
      * Increments a counter metric.
@@ -38,7 +38,8 @@ public interface PrometheusScriptInterface {
      * @param labels Map of label names to values (can be null)
      * @throws Exception if increment fails
      */
-    void incrementCounter(String metricName, double value, Map<String, Object> labels) throws Exception;
+    void incrementCounter(String metricName, double value, Map<String, Object> labels)
+            throws Exception;
 
     // Gauge Operations
 
@@ -51,7 +52,9 @@ public interface PrometheusScriptInterface {
      * @param errorIfExists Whether to throw an error if the metric already exists (default: false)
      * @throws Exception if metric creation fails
      */
-    void createGauge(String metricName, String description, List<String> labelNames, boolean errorIfExists) throws Exception;
+    void createGauge(
+            String metricName, String description, List<String> labelNames, boolean errorIfExists)
+            throws Exception;
 
     /**
      * Sets a gauge metric to a specific value.
@@ -71,7 +74,8 @@ public interface PrometheusScriptInterface {
      * @param labels Map of label names to values (can be null)
      * @throws Exception if increment fails
      */
-    void incrementGauge(String metricName, double value, Map<String, Object> labels) throws Exception;
+    void incrementGauge(String metricName, double value, Map<String, Object> labels)
+            throws Exception;
 
     /**
      * Decrements a gauge metric.
@@ -81,7 +85,8 @@ public interface PrometheusScriptInterface {
      * @param labels Map of label names to values (can be null)
      * @throws Exception if decrement fails
      */
-    void decrementGauge(String metricName, double value, Map<String, Object> labels) throws Exception;
+    void decrementGauge(String metricName, double value, Map<String, Object> labels)
+            throws Exception;
 
     // Histogram Operations
 
@@ -95,7 +100,13 @@ public interface PrometheusScriptInterface {
      * @param errorIfExists Whether to throw an error if the metric already exists (default: false)
      * @throws Exception if metric creation fails
      */
-    void createHistogram(String metricName, String description, List<String> labelNames, double[] buckets, boolean errorIfExists) throws Exception;
+    void createHistogram(
+            String metricName,
+            String description,
+            List<String> labelNames,
+            double[] buckets,
+            boolean errorIfExists)
+            throws Exception;
 
     /**
      * Observes a value in a histogram metric.
@@ -105,7 +116,8 @@ public interface PrometheusScriptInterface {
      * @param labels Map of label names to values (can be null)
      * @throws Exception if observation fails
      */
-    void observeHistogram(String metricName, double value, Map<String, Object> labels) throws Exception;
+    void observeHistogram(String metricName, double value, Map<String, Object> labels)
+            throws Exception;
 
     // Utility Operations
 

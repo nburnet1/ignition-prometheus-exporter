@@ -4,6 +4,8 @@ ignition-sdk = "8.3.0"
 modl-plugin = "0.5.0"
 prometheus = "0.16.0"
 slf4j = "2.0.9"
+junit = "5.10.2"
+mockito = "5.11.0"
 
 [libraries]
 # Ignition SDK dependencies
@@ -12,6 +14,10 @@ ignition-gateway-api = { module = "com.inductiveautomation.ignitionsdk:gateway-a
 ignition-client-api = { module = "com.inductiveautomation.ignitionsdk:client-api", version.ref = "ignition" }
 ignition-vision-api = { module = "com.inductiveautomation.ignitionsdk:vision-client-api", version.ref = "ignition" }
 ignition-designer-api = { module = "com.inductiveautomation.ignitionsdk:designer-api", version.ref = "ignition" }
+junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
+mockito-junit-jupiter = { module = "org.mockito:mockito-junit-jupiter", version.ref = "mockito" }
 
 # Prometheus dependencies
 prometheus = { module = "io.prometheus:simpleclient", version.ref = "prometheus" }

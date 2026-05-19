@@ -1,5 +1,11 @@
 package dev.bwdesigngroup.prometheus.gateway;
 
+import io.prometheus.client.CollectorRegistry;
+import io.prometheus.client.exporter.common.TextFormat;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -7,22 +13,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Set;
 
-import io.prometheus.client.CollectorRegistry;
-import io.prometheus.client.exporter.common.TextFormat;
-
-import jakarta.servlet.ServletOutputStream;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
 /**
  * Jakarta-based metrics servlet for Ignition 8.3+.
  *
- * Ignition 8.3 webserver uses {@code jakarta.servlet} APIs, whereas the
- * bundled Prometheus 0.16 {@code MetricsServlet} extends
- * {@code javax.servlet.http.HttpServlet}. This servlet replaces that bundled
- * servlet by writing the Prometheus exposition format directly using
- * {@link TextFormat}.
+ * <p>Ignition 8.3 webserver uses {@code jakarta.servlet} APIs, whereas the bundled Prometheus 0.16
+ * {@code MetricsServlet} extends {@code javax.servlet.http.HttpServlet}. This servlet replaces that
+ * bundled servlet by writing the Prometheus exposition format directly using {@link TextFormat}.
  */
 public class PrometheusMetricsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -47,11 +43,9 @@ public class PrometheusMetricsServlet extends HttpServlet {
         Set<String> includedNameSet = parseNames(req.getParameterValues("name[]"));
 
         try (ServletOutputStream out = resp.getOutputStream();
-             Writer writer = new OutputStreamWriter(out, StandardCharsets.UTF_8)) {
+                Writer writer = new OutputStreamWriter(out, StandardCharsets.UTF_8)) {
             TextFormat.writeFormat(
-                    contentType,
-                    writer,
-                    registry.filteredMetricFamilySamples(includedNameSet));
+                    contentType, writer, registry.filteredMetricFamilySamples(includedNameSet));
             writer.flush();
         }
     }
@@ -72,5 +66,4 @@ public class PrometheusMetricsServlet extends HttpServlet {
         }
         return names;
     }
-
 }

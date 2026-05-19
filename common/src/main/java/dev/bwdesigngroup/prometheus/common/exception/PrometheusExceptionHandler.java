@@ -4,9 +4,7 @@ import org.python.core.PyException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Unified exception handler for Prometheus operations with Jython compatibility
- */
+/** Unified exception handler for Prometheus operations with Jython compatibility */
 public class PrometheusExceptionHandler {
     private static final Logger logger = LoggerFactory.getLogger(PrometheusExceptionHandler.class);
 
@@ -15,8 +13,8 @@ public class PrometheusExceptionHandler {
     }
 
     /**
-     * Execute any operation with proper Jython-compatible exception handling
-     * Works for all contexts: scripting, RPC, and result wrappers
+     * Execute any operation with proper Jython-compatible exception handling Works for all
+     * contexts: scripting, RPC, and result wrappers
      */
     public static <T> T execute(String operation, Callable<T> callable) throws PyException {
         try {
@@ -34,24 +32,23 @@ public class PrometheusExceptionHandler {
             String errorMsg = extractErrorMessage(e);
             String formattedError = formatError(operation, errorMsg);
             logger.error("Prometheus operation '{}' failed: {}", operation, errorMsg, e);
-            
+
             // Create a PrometheusException and convert it to Python exception
             PrometheusException prometheusException = new PrometheusException(formattedError, e);
             throw prometheusException.toPythonException();
         }
     }
 
-    /**
-     * Extract meaningful error message from exception chain
-     */
+    /** Extract meaningful error message from exception chain */
     private static String extractErrorMessage(Exception e) {
         String errorMsg = e.getMessage();
         if (errorMsg != null && !errorMsg.isEmpty()) {
             // Clean up common RPC error prefixes
-            errorMsg = errorMsg.replaceFirst("^java\\.lang\\.RuntimeException: ", "")
-                    .replaceFirst(
-                            "^com\\.inductiveautomation\\.ignition\\.client\\.gateway_interface\\.GatewayException: ",
-                            "");
+            errorMsg =
+                    errorMsg.replaceFirst("^java\\.lang\\.RuntimeException: ", "")
+                            .replaceFirst(
+                                    "^com\\.inductiveautomation\\.ignition\\.client\\.gateway_interface\\.GatewayException: ",
+                                    "");
             return errorMsg;
         }
 
@@ -67,16 +64,12 @@ public class PrometheusExceptionHandler {
         return "Unknown error: " + e.getClass().getSimpleName();
     }
 
-    /**
-     * Format error message with operation context
-     */
+    /** Format error message with operation context */
     private static String formatError(String operation, String message) {
         return String.format("Prometheus %s operation failed: %s", operation, message);
     }
 
-    /**
-     * Single functional interface for all operations
-     */
+    /** Single functional interface for all operations */
     @FunctionalInterface
     public interface Callable<T> {
         T call() throws Exception;

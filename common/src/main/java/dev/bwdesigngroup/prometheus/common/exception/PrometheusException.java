@@ -3,9 +3,7 @@ package dev.bwdesigngroup.prometheus.common.exception;
 import org.python.core.Py;
 import org.python.core.PyException;
 
-/**
- * Custom exception class for Prometheus operations with Jython compatibility
- */
+/** Custom exception class for Prometheus operations with Jython compatibility */
 public class PrometheusException extends Exception {
     private static final long serialVersionUID = 1L;
 
@@ -30,8 +28,8 @@ public class PrometheusException extends Exception {
     }
 
     /**
-     * Convert this exception to a Python-compatible PyException
-     * Creates a custom PrometheusError type in Python for better error handling
+     * Convert this exception to a Python-compatible PyException Creates a custom PrometheusError
+     * type in Python for better error handling
      */
     public PyException toPythonException() {
         String message = getMessage();
@@ -39,19 +37,19 @@ public class PrometheusException extends Exception {
         // Determine the appropriate Python exception type based on the error
         if (message.toLowerCase().contains("not found")) {
             return Py.KeyError(message);
-        } else if (message.toLowerCase().contains("invalid") || message.toLowerCase().contains("validation")) {
+        } else if (message.toLowerCase().contains("invalid")
+                || message.toLowerCase().contains("validation")) {
             return Py.ValueError(message);
-        } else if (message.toLowerCase().contains("timeout") || message.toLowerCase().contains("network")) {
+        } else if (message.toLowerCase().contains("timeout")
+                || message.toLowerCase().contains("network")) {
             return Py.IOError(message);
         } else {
             // Create a custom PrometheusError instead of generic RuntimeError
             return createPrometheusError(message);
         }
     }
-    
-    /**
-     * Create a custom Python exception type for Prometheus-specific errors
-     */
+
+    /** Create a custom Python exception type for Prometheus-specific errors */
     private PyException createPrometheusError(String message) {
         // For now, use RuntimeError but with a clear prefix to identify it as a Prometheus error
         return Py.RuntimeError("PrometheusError: " + message);

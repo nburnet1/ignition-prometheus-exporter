@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [v0.2.0] - $(date +%Y-%m-%d)
+## [v0.2.1] - $(date +%Y-%m-%d)
 
 ### Changes
 
