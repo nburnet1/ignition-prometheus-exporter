@@ -273,7 +273,7 @@ rate(script_executions_total{status="error"}[5m]) / rate(script_executions_total
 - **Ignition SDK**: 8.1.44
 - **Prometheus Client**: 0.16.0
 - **Scope Support**: Gateway (G), Client (C), Designer (D)
-- **Module ID**: `dev.bwdesigngroup.prometheus.PrometheusExporter`
+- **Module ID**: `dev.bwdesigngroup.prometheus.prometheusexporter`
 
 ## License
 

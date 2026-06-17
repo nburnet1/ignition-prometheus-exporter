@@ -100,11 +100,12 @@ subprojects {
 ignitionModule {
   name.set("Prometheus Metrics Exporter")
   fileName.set("Prometheus-Exporter.modl")
-  id.set("dev.bwdesigngroup.prometheus.PrometheusExporter")
+  id.set("dev.bwdesigngroup.prometheus.prometheusexporter")
   moduleVersion.set(versionWithBuildId)
   license.set("LICENSE.txt")
   moduleDescription.set("Adds Prometheus metrics exporting to Ignition")
   requiredIgnitionVersion.set(if (ignitionTarget == "8.1") "8.1.44" else "8.3.1")
+  freeModule.set(true)
 
   projectScopes.putAll(
       mapOf(":common" to "GCD", ":gateway" to "G", ":designer" to "D", ":client" to "C"))

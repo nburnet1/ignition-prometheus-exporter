@@ -4,7 +4,7 @@ package dev.bwdesigngroup.prometheus.common.util;
 public class PrometheusConstants {
 
     // Module Information
-    public static final String MODULE_ID = "dev.bwdesigngroup.prometheus.PrometheusExporter";
+    public static final String MODULE_ID = "dev.bwdesigngroup.prometheus.prometheusexporter";
     public static final String MODULE_NAME = "Prometheus Metrics Exporter";
 
     // Script Module Names
